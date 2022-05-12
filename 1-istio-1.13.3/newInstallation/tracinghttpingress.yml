@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: tracing-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https-tracing
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: telemetry-gw-cert
+    hosts:
+    - "tracing.arkainc.test.dev"
+  - port:
+      number: 80
+      name: http-tracing
+      protocol: HTTP
+    hosts:
+    - "tracing.arkainc.test.dev"

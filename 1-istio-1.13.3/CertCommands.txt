@@ -1,0 +1,8 @@
+	openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -subj "/O=Arka Inc./CN=*.arkainc.test.dev" -keyout C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/ca.key -out C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/ca.crt
+	
+	openssl req -out C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/cert.csr -newkey rsa:2048 -nodes -keyout C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/tls.key -subj "/CN=*.arkainc.test.dev/O=Arka Inc"
+	
+	openssl x509 -req -sha256 -days 365 -CA C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/ca.crt -CAkey C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/ca.key -set_serial 0 -in C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/cert.csr -out C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/tls.crt
+	
+	
+	kubectl create -n istio-system secret tls telemetry-gw-cert --key=C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/tls.key --cert=C:/Users/sinha/Downloads/istio-1.13.3-win/istio-1.13.3/certs/tls.crt
