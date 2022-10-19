@@ -6,3 +6,7 @@ helm upgrade --install confluent-operator confluentinc/confluent-for-kubernetes
 kubectl apply -f https://raw.githubusercontent.com/confluentinc/confluent-kubernetes-examples/master/quickstart-deploy/confluent-platform.yaml
 kubectl apply -f https://raw.githubusercontent.com/confluentinc/confluent-kubernetes-examples/master/quickstart-deploy/producer-app-data.yaml
 kubectl port-forward controlcenter-0 9021:9021
+
+----lenses --install
+helm repo add lensesio https://helm.repo.lenses.io
+helm install lenses lensesio/lenses --namespace lenses --create-namespace --version 5.0.1
