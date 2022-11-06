@@ -1,0 +1,26 @@
+apiVersion: platform.confluent.io/v1beta1
+kind: Connect
+metadata:
+ name: connect
+ namespace: confluent
+spec:
+ replicas: 1
+ image:
+   application: confluentinc/cp-server-connect:7.0.1
+   init: confluentinc/confluent-init-container:2.2.0-1
+ build:
+   type: onDemand
+   onDemand:
+     plugins:
+        locationType: confluentHub
+        confluentHub:
+         - name: kafka-connect-s3-source
+           owner: confluentinc
+           version: 2.0.1
+         - name: kafka-connect-azure-event-hubs
+           owner: confluentinc
+           version: 2.0.3  
+     storageLimit: 4G     
+ dependencies:
+    kafka:
+      bootstrapEndpoint: kafka:9071

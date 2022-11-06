@@ -10,3 +10,14 @@ kubectl port-forward controlcenter-0 9021:9021
 ----lenses --install
 helm repo add lensesio https://helm.repo.lenses.io
 helm install lenses lensesio/lenses --namespace lenses --create-namespace --version 5.0.1
+kafka-2.kafka.confluent.svc.cluster.local
+http://schemaregistry.confluent.svc.cluster.local:8081
+http://connect.confluent.svc.cluster.local:8083
+
+---install monitoring
+helm repo add stable https://charts.helm.sh/stable
+helm repo add grafana https://grafana.github.io/helm-charts
+
+helm repo update
+
+helm upgrade --install demo-test stable/prometheus --set alertmanager.persistentVolume.enabled=false --set server.persistentVolume.enabled=false --namespace default
